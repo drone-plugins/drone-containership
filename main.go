@@ -27,6 +27,10 @@ func main() {
 		vargs.Application = repo.Name
 	}
 
+	if vargs.Image == "" {
+		vargs.Image = repo.FullName + ":latest"
+	}
+
 	if vargs.ApiKey == "" {
 		fmt.Println("Error: ContainerShip Cloud API Key is required!")
 		os.Exit(1)
@@ -37,18 +41,14 @@ func main() {
 		os.Exit(1)
 	}
 
-	if vargs.Image == "" {
-		vargs.Image = repo.FullName + ":latest"
-	}
-
 	if vargs.Organization == "" {
 		fmt.Println("Error: ContainerShip Cloud Organization is required!")
 		os.Exit(1)
 	}
 
-	ContainerShipCloudClient := client.NewContainerShipCloudClient(vargs.Organization, vargs.ApiKey)
+	client := client.NewContainerShipCloudClient(vargs.Organization, vargs.ApiKey)
 
-	response, err := ContainerShipCloudClient.GetApplication(vargs.ClusterId, vargs.Application)
+	response, err := client.GetApplication(vargs.ClusterId, vargs.Application)
 
 	if err != nil {
 		fmt.Println(err)
@@ -60,32 +60,35 @@ func main() {
 		"image": vargs.Image,
 	}
 
-	if response.StatusCode == 404 {
-		create_response, err := ContainerShipCloudClient.CreateApplication(vargs.ClusterId, vargs.Application, application)
+	switch response.StatusCode {
+	case 404:
+		create_response, err := client.CreateApplication(vargs.ClusterId, vargs.Application, application)
 		if err != nil {
 			fmt.Println(err)
 			os.Exit(1)
 		}
 
-		if create_response.StatusCode != 201 {
-			fmt.Printf("Error: ContainerShip Cloud returned a %s response when creating %s\n", response.StatusCode, vargs.Application)
-		} else {
+		switch create_response.StatusCode {
+		case 201:
 			fmt.Printf("Success: ContainerShip Cloud created %s\n", vargs.Application)
+		default:
+			fmt.Printf("Error: ContainerShip Cloud returned a %d response when creating %s\n", create_response.StatusCode, vargs.Application)
 		}
-	} else if response.StatusCode == 200 {
-		update_response, err := ContainerShipCloudClient.UpdateApplication(vargs.ClusterId, vargs.Application, application)
+	case 200:
+		update_response, err := client.UpdateApplication(vargs.ClusterId, vargs.Application, application)
 		if err != nil {
 			fmt.Println(err)
 			os.Exit(1)
 		}
 
-		if update_response.StatusCode != 200 {
-			fmt.Printf("Error: ContainerShip Cloud returned a %s response when updating %s\n", response.StatusCode, vargs.Application)
-		} else {
+		switch update_response.StatusCode {
+		case 200:
 			fmt.Printf("Success: ContainerShip Cloud updated %s\n", vargs.Application)
+		default:
+			fmt.Printf("Error: ContainerShip Cloud returned a %d response when updating %s\n", update_response.StatusCode, vargs.Application)
 		}
-	} else {
-		fmt.Printf("Error: ContainerShip Cloud returned a %s response when fetching %s\n", response.StatusCode, vargs.Application)
+	default:
+		fmt.Printf("Error: ContainerShip Cloud returned a %d response when fetching %s\n", response.StatusCode, vargs.Application)
 		os.Exit(1)
 	}
 }
