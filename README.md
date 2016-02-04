@@ -4,7 +4,7 @@
 [![Coverage Status](https://aircover.co/badges/drone-plugins/drone-containership/coverage.svg)](https://aircover.co/drone-plugins/drone-containership)
 [![](https://badge.imagelayers.io/plugins/drone-containership:latest.svg)](https://imagelayers.io/?images=plugins/drone-containership:latest 'Get your own badge on imagelayers.io')
 
-Drone plugin for deploying to ContainerShip
+Drone plugin to deploy or update a project on ContainerShip
 
 ## Binary
 
