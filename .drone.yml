@@ -1,0 +1,39 @@
+build:
+  image: golang:1.5
+  environment:
+    - CGO_ENABLED=0
+  commands:
+    - make deps
+    - make vet
+    - make build
+    - make test
+
+publish:
+  coverage:
+    when:
+      branch: master
+  docker:
+    username: $$DOCKER_USER
+    password: $$DOCKER_PASS
+    email: $$DOCKER_EMAIL
+    repo: plugins/drone-containership
+    tag: latest
+    when:
+      branch: master
+  docker:
+    username: $$DOCKER_USER
+    password: $$DOCKER_PASS
+    email: $$DOCKER_EMAIL
+    repo: plugins/drone-containership
+    tag: develop
+    when:
+      branch: develop
+
+plugin:
+  name: Anynines
+  desc: Deploy or update a project on ContainerShip
+  type: deploy
+  image: plugins/drone-containership
+  labels:
+    - containership
+    - paas
