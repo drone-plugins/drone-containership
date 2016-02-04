@@ -10,7 +10,6 @@ import (
 )
 
 var (
-	build     string
 	buildDate string
 )
 
@@ -39,8 +38,7 @@ func main() {
 	}
 
 	if vargs.Image == "" {
-		fmt.Println("Error: ContainerShip Application Image is required!")
-		os.Exit(1)
+		vargs.Image = repo.FullName + ":latest"
 	}
 
 	if vargs.Organization == "" {
