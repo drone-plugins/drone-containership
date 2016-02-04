@@ -1,4 +1,9 @@
 # drone-containership
+
+[![Build Status](http://beta.drone.io/api/badges/drone-plugins/drone-containership/status.svg)](http://beta.drone.io/drone-plugins/drone-containership)
+[![Coverage Status](https://aircover.co/badges/drone-plugins/drone-containership/coverage.svg)](https://aircover.co/drone-plugins/drone-containership)
+[![](https://badge.imagelayers.io/plugins/drone-containership:latest.svg)](https://imagelayers.io/?images=plugins/drone-containership:latest 'Get your own badge on imagelayers.io')
+
 Drone plugin for deploying to ContainerShip
 
 ## Binary
