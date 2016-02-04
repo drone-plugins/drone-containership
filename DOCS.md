@@ -1,14 +1,15 @@
-Use the ContainerShip plugin to create or update an application on [ContainerShip](https://containership.io).
+Use this plugin for deplying an application to [ContainerShip](https://containership.io).
+You can override the default configuration with the following parameters:
 
-The following parameters are used to configure this plugin:
-
-- `organization` - your ContainerShip organization
-- `api_key` - your ContainerShip organization API Key
+- `organization` - Your ContainerShip organization
+- `api_key` - Your ContainerShip organization API Key
 - `cluster_id` - ID of your ContainerShip cluster
-- `application` - name of the application you wish to create or update, defaults to `$$DRONE_REPO`
-- `image` - docker image to use for this application, including tag (`MyOrg/MyImage:latest`)
+- `application` - Name of the application, defaults to repo name
+- `image` - Docker image to use, including tag (`MyOrg/MyImage:latest`)
 
-The following is a sample ContainerShip configuration in your `.drone.yml` file:
+## Example
+
+The following is a sample configuration in your .drone.yml file:
 
 ```yaml
 deploy:
