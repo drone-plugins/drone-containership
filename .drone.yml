@@ -30,7 +30,7 @@ publish:
       branch: develop
 
 plugin:
-  name: Anynines
+  name: ContainerShip
   desc: Deploy or update a project on ContainerShip
   type: deploy
   image: plugins/drone-containership
