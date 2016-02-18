@@ -1,4 +1,4 @@
-Use this plugin for deplying an application to [ContainerShip](https://containership.io).
+Use this plugin for deploying an application to [ContainerShip](https://containership.io).
 You can override the default configuration with the following parameters:
 
 - `organization` - Your ContainerShip organization
