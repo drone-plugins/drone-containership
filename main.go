@@ -10,11 +10,11 @@ import (
 )
 
 var (
-	buildDate string
+	buildCommit string
 )
 
 func main() {
-	fmt.Printf("Drone ContainerShip Plugin built at %s\n", buildDate)
+	fmt.Printf("Drone ContainerShip Plugin built from %s\n", buildCommit)
 
 	repo := drone.Repo{}
 	vargs := Params{}
