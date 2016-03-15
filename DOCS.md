@@ -5,7 +5,7 @@ You can override the default configuration with the following parameters:
 - `api_key` - Your ContainerShip organization API Key
 - `cluster_id` - ID of your ContainerShip cluster
 - `application` - Name of the application, defaults to repo name
-- `image` - Docker image to use, including tag (`MyOrg/MyImage:latest`)
+- `docker_image` - Docker image to use, including tag (`MyOrg/MyImage:latest`)
 
 ## Example
 
@@ -18,5 +18,5 @@ deploy:
     api_key: abcdef1234567890
     cluster_id: abcdef1234567890
     application: my-app-name
-    image: MyOrg/MyImage:latest
+    docker_image: MyOrg/MyImage:latest
 ```
