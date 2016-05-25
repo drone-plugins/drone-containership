@@ -50,7 +50,7 @@ make deps build
         "api_key": "abcdef123456790",
         "cluster_id": "abcdef1234567890",
         "application": "my-app-name",
-        "image": "MyOrg/MyImage:latest"
+        "docker_image": "MyOrg/MyImage:latest"
     }
 }
 EOF
@@ -100,7 +100,7 @@ docker run -i plugins/drone-containership <<EOF
         "api_key": "abcdef123456790",
         "cluster_id": "abcdef1234567890",
         "application": "my-app-name",
-        "image": "MyOrg/MyImage:latest"
+        "docker_image": "MyOrg/MyImage:latest"
     }
 }
 EOF
