@@ -7,6 +7,7 @@ github.com/containership/go-containership.cloud v0.0.0-20160121053724-2e93a4ef9b
 github.com/containership/go-containership.cloud v0.0.0-20160121053724-2e93a4ef9bec/go.mod h1:ZQY7UAVwxBg/jfgXK8E4pJY5yWboPsadNaiqISjpne0=
 github.com/drone/drone-go v0.0.0-20160502151758-eaa41f7836a1 h1:2fZ6NZF8Z37FLn5NIElsW3OELMY2xzQ2XPuXJmnAowE=
 github.com/drone/drone-go v0.0.0-20160502151758-eaa41f7836a1/go.mod h1:qVb1k1w9X5jgoGyLtbnfWNnd4XZfAwokxBmiutbpGqw=
+github.com/drone/drone-go v0.8.4/go.mod h1:qVb1k1w9X5jgoGyLtbnfWNnd4XZfAwokxBmiutbpGqw=
 github.com/golang/protobuf v1.2.0 h1:P3YflyNX/ehuJFLhxviNdFxQPkGK5cDcApsge1SqnvM=
 github.com/golang/protobuf v1.2.0/go.mod h1:6lQm79b+lXiMfvg/cZm0SGofjICqVBUtrP5yJMmIC1U=
 github.com/kr/pretty v0.1.0 h1:L/CwN0zerZDmRFUapSPitk6f+Q3+0za1rQkzVuMiMFI=
