@@ -8,104 +8,44 @@
 [![Go Doc](https://godoc.org/github.com/drone-plugins/drone-containership?status.svg)](http://godoc.org/github.com/drone-plugins/drone-containership)
 [![Go Report](https://goreportcard.com/badge/github.com/drone-plugins/drone-containership)](https://goreportcard.com/report/github.com/drone-plugins/drone-containership)
 
-Drone plugin to deploy or update a project on ContainerShip. For the usage information and a listing of the available options please take a look at [the docs](DOCS.md).
+> Warning: This plugin has not been migrated to Drone >= 0.5 yet, you are not able to use it with a current Drone version until somebody volunteers to update the plugin structure to the new format.
 
-## Binary
+Drone plugin to deploy or update a project on ContainerShip. For the usage information and a listing of the available options please take a look at [the docs](http://plugins.drone.io/drone-plugins/drone-containership/).
 
-Build the binary using `make`:
+## Build
 
-```
-make deps build
-```
+Build the binary with the following command:
 
-### Example
+```console
+export GOOS=linux
+export GOARCH=amd64
+export CGO_ENABLED=0
+export GO111MODULE=on
 
-```sh
-./drone-containership <<EOF
-{
-    "repo": {
-        "clone_url": "git://github.com/drone/drone",
-        "owner": "drone",
-        "name": "drone",
-        "full_name": "drone/drone"
-    },
-    "system": {
-        "link_url": "https://beta.drone.io"
-    },
-    "build": {
-        "number": 22,
-        "status": "success",
-        "started_at": 1421029603,
-        "finished_at": 1421029813,
-        "message": "Update the Readme",
-        "author": "johnsmith",
-        "author_email": "john.smith@gmail.com"
-        "event": "push",
-        "branch": "master",
-        "commit": "436b7a6e2abaddfd35740527353e78a227ddcb2c",
-        "ref": "refs/heads/master"
-    },
-    "workspace": {
-        "root": "/drone/src",
-        "path": "/drone/src/github.com/drone/drone"
-    },
-    "vargs": {
-        "organization": "MyContainerShipOrganization",
-        "api_key": "abcdef123456790",
-        "cluster_id": "abcdef1234567890",
-        "application": "my-app-name",
-        "docker_image": "MyOrg/MyImage:latest"
-    }
-}
-EOF
+go build -v -a -tags netgo -o release/linux/amd64/drone-containership
 ```
 
 ## Docker
 
-Build the container using `make`:
+Build the Docker image with the following command:
 
+```console
+docker build \
+  --label org.label-schema.build-date=$(date -u +"%Y-%m-%dT%H:%M:%SZ") \
+  --label org.label-schema.vcs-ref=$(git rev-parse --short HEAD) \
+  --file docker/Dockerfile.linux.amd64 --tag plugins/containership .
 ```
-make deps docker
-```
 
-### Example
+## Usage
 
-```sh
-docker run -i plugins/drone-containership <<EOF
-{
-    "repo": {
-        "clone_url": "git://github.com/drone/drone",
-        "owner": "drone",
-        "name": "drone",
-        "full_name": "drone/drone"
-    },
-    "system": {
-        "link_url": "https://beta.drone.io"
-    },
-    "build": {
-        "number": 22,
-        "status": "success",
-        "started_at": 1421029603,
-        "finished_at": 1421029813,
-        "message": "Update the Readme",
-        "author": "johnsmith",
-        "author_email": "john.smith@gmail.com"
-        "event": "push",
-        "branch": "master",
-        "commit": "436b7a6e2abaddfd35740527353e78a227ddcb2c",
-        "ref": "refs/heads/master"
-    },
-    "workspace": {
-        "root": "/drone/src",
-        "path": "/drone/src/github.com/drone/drone"
-    },
-    "vargs": {
-        "organization": "MyContainerShipOrganization",
-        "api_key": "abcdef123456790",
-        "cluster_id": "abcdef1234567890",
-        "application": "my-app-name",
-        "docker_image": "MyOrg/MyImage:latest"
-    }
-}
-EOF
+```console
+docker run --rm \
+  -e PLUGIN_ORGANIZATION=MyContainerShipOrganization \
+  -e PLUGIN_API_KEY=abcdef123456790 \
+  -e PLUGIN_CLUSTER_ID=abcdef1234567890 \
+  -e PLUGIN_APPLICATION=my-app-name \
+  -e PLUGIN_DOCKER_IMAGE=MyOrg/MyImage:latest \
+  -v $(pwd):$(pwd) \
+  -w $(pwd) \
+  plugins/containership
 ```
