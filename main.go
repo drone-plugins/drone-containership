@@ -10,11 +10,11 @@ import (
 )
 
 var (
-	buildCommit string
+	version = "unknown"
 )
 
 func main() {
-	fmt.Printf("Drone ContainerShip Plugin built from %s\n", buildCommit)
+	fmt.Printf("Drone ContainerShip Plugin built from %s\n", version)
 
 	repo := drone.Repo{}
 	vargs := Params{}
